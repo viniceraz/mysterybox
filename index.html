@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>$MYST — 10,000 boxes. something's inside.</title>
+<meta name="description" content="Mint a mystery box for 30 cents. Hold it. Get airdropped $MYST. The rarer the box, the fatter the drop. Robinhood Chain.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:ital,wght@0,400;0,700;1,700&family=Gochi+Hand&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#00C805;
+  --green-dark:#009A04;
+  --paper:#FFFDF5;
+  --ink:#111111;
+  --yellow:#FFD93B;
+  --pink:#FF7AC6;
+  --cyan:#4DE8DC;
+  --purple:#B678FF;
+  --wobble:255px 18px 225px 18px / 18px 225px 18px 255px;
+  --wobble2:18px 225px 18px 255px / 255px 18px 225px 18px;
+  --shadow:6px 6px 0 var(--ink);
+  --font-big:'Bangers',cursive;
+  --font-body:'Comic Neue',cursive;
+  --font-hand:'Gochi Hand',cursive;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--green);
+  background-image:
+    radial-gradient(rgba(255,255,255,.14) 2px,transparent 2px);
+  background-size:34px 34px;
+  color:var(--ink);
+  font-family:var(--font-body);
+  font-size:18px;
+  line-height:1.55;
+  overflow-x:hidden;
+}
+::selection{background:var(--ink);color:var(--green)}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+h1,h2{font-family:var(--font-big);letter-spacing:.03em;line-height:.95;font-weight:400}
+
+/* ---------- doodle question marks ---------- */
+.doodle{
+  position:absolute;font-family:var(--font-hand);font-weight:700;
+  color:rgba(0,0,0,.14);user-select:none;pointer-events:none;z-index:0;
+}
+
+/* ---------- ticker ---------- */
+.ticker{
+  background:var(--ink);color:var(--paper);
+  font-family:var(--font-big);letter-spacing:.08em;font-size:1.05rem;
+  overflow:hidden;white-space:nowrap;
+  border-bottom:4px solid var(--ink);
+  position:relative;z-index:60;
+}
+.ticker-track{display:inline-block;padding:9px 0;animation:tick 22s linear infinite}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ticker span{margin:0 22px}
+.ticker .g{color:var(--green)}
+
+/* ---------- nav ---------- */
+nav{
+  position:sticky;top:0;z-index:50;
+  background:var(--paper);
+  border-bottom:4px solid var(--ink);
+}
+.nav-inner{
+  max-width:1100px;margin:0 auto;padding:12px 22px;
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+}
+.logo{
+  font-family:var(--font-big);font-size:1.7rem;letter-spacing:.04em;
+  display:flex;align-items:center;gap:10px;transform:rotate(-2deg);
+}
+.logo .q{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:40px;height:40px;border:3px solid var(--ink);border-radius:12px 14px 10px 16px;
+  background:var(--yellow);font-size:1.5rem;box-shadow:3px 3px 0 var(--ink);
+}
+.nav-links{display:flex;gap:22px;font-weight:700;font-size:1rem}
+.nav-links a{border-bottom:3px solid transparent}
+.nav-links a:hover{border-bottom-color:var(--ink);transform:rotate(-1deg)}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--font-big);font-size:1.15rem;letter-spacing:.05em;
+  padding:12px 26px;border:4px solid var(--ink);border-radius:var(--wobble);
+  background:var(--yellow);color:var(--ink);cursor:pointer;
+  box-shadow:var(--shadow);
+  transition:transform .1s ease,box-shadow .1s ease;
+}
+.btn:hover{transform:translate(-2px,-2px) rotate(-1deg);box-shadow:9px 9px 0 var(--ink)}
+.btn:active{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--ink)}
+.btn-green{background:var(--green)}
+.btn-white{background:var(--paper)}
+@media(max-width:760px){.nav-links{display:none}}
+
+/* ---------- hero ---------- */
+header{position:relative;padding:70px 0 90px;overflow:hidden}
+.hero-grid{
+  position:relative;z-index:1;
+  display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center;
+}
+.stamp{
+  display:inline-block;font-family:var(--font-hand);font-size:1.05rem;font-weight:700;
+  background:var(--paper);border:3px solid var(--ink);border-radius:99px;
+  padding:6px 18px;transform:rotate(-2deg);box-shadow:4px 4px 0 var(--ink);
+  margin-bottom:22px;
+}
+h1{font-size:clamp(3rem,7.5vw,5.2rem);margin-bottom:18px;text-shadow:4px 4px 0 rgba(0,0,0,.18)}
+h1 .hl{
+  color:var(--paper);
+  -webkit-text-stroke:2px var(--ink);
+  text-shadow:5px 5px 0 var(--ink);
+}
+.hero-sub{
+  font-size:1.15rem;font-weight:700;max-width:30rem;margin-bottom:30px;
+  background:var(--paper);border:3px solid var(--ink);border-radius:var(--wobble2);
+  padding:16px 20px;box-shadow:var(--shadow);transform:rotate(.5deg);
+}
+.hero-sub .scratch{text-decoration:line-through;opacity:.55}
+.hero-cta{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:36px}
+.hero-stats{display:flex;gap:14px;flex-wrap:wrap}
+.hstat{
+  background:var(--paper);border:3px solid var(--ink);border-radius:14px 18px 12px 20px;
+  padding:10px 16px;box-shadow:4px 4px 0 var(--ink);text-align:center;
+}
+.hstat:nth-child(odd){transform:rotate(-1.5deg)}
+.hstat:nth-child(even){transform:rotate(1.5deg)}
+.hstat b{font-family:var(--font-big);font-size:1.35rem;display:block;letter-spacing:.04em}
+.hstat span{font-size:.78rem;font-weight:700;text-transform:uppercase}
+.hero-art{position:relative;display:flex;justify-content:center;align-items:center}
+.burst{
+  position:absolute;inset:-8%;z-index:0;
+  background:conic-gradient(var(--yellow) 0 12deg,transparent 12deg 30deg,var(--yellow) 30deg 42deg,transparent 42deg 60deg,var(--yellow) 60deg 72deg,transparent 72deg 90deg,var(--yellow) 90deg 102deg,transparent 102deg 120deg,var(--yellow) 120deg 132deg,transparent 132deg 150deg,var(--yellow) 150deg 162deg,transparent 162deg 180deg,var(--yellow) 180deg 192deg,transparent 192deg 210deg,var(--yellow) 210deg 222deg,transparent 222deg 240deg,var(--yellow) 240deg 252deg,transparent 252deg 270deg,var(--yellow) 270deg 282deg,transparent 282deg 300deg,var(--yellow) 300deg 312deg,transparent 312deg 330deg,var(--yellow) 330deg 342deg,transparent 342deg 360deg);
+  border-radius:50%;opacity:.85;
+  animation:spin 30s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hero-art img{
+  position:relative;z-index:1;
+  width:min(400px,88%);border:5px solid var(--ink);border-radius:26px;
+  box-shadow:10px 10px 0 var(--ink);
+  transform:rotate(2deg);
+  animation:bob 4s ease-in-out infinite;
+}
+@keyframes bob{0%,100%{transform:rotate(2deg) translateY(0)}50%{transform:rotate(2deg) translateY(-10px)}}
+.hero-bubble{
+  position:absolute;z-index:2;top:-6px;right:2%;
+  font-family:var(--font-hand);font-size:1.1rem;font-weight:700;
+  background:var(--paper);border:3px solid var(--ink);border-radius:20px;
+  padding:10px 16px;box-shadow:4px 4px 0 var(--ink);transform:rotate(4deg);
+  max-width:190px;text-align:center;
+}
+.hero-bubble::after{
+  content:"";position:absolute;bottom:-16px;left:28px;
+  border:9px solid transparent;border-top-color:var(--ink);
+}
+.rare-tag{
+  position:absolute;z-index:2;bottom:-10px;left:6%;
+  font-family:var(--font-big);font-size:1.05rem;letter-spacing:.06em;
+  background:var(--pink);border:3px solid var(--ink);border-radius:12px;
+  padding:6px 14px;box-shadow:4px 4px 0 var(--ink);transform:rotate(-5deg);
+}
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr;gap:56px}
+  .hero-art{order:-1}
+}
+
+/* ---------- section base ---------- */
+section{padding:90px 0;position:relative}
+.sec-head{max-width:680px;margin-bottom:48px;position:relative;z-index:1}
+.sec-head h2{
+  font-size:clamp(2.2rem,5vw,3.4rem);margin-bottom:14px;
+  text-shadow:3px 3px 0 rgba(0,0,0,.18);
+}
+.sec-head p{font-weight:700;font-size:1.05rem}
+.paper-sec{
+  background:var(--paper);
+  border-top:4px solid var(--ink);border-bottom:4px solid var(--ink);
+}
+
+/* ---------- rarities ---------- */
+.rarity-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;position:relative;z-index:1}
+.rcard{
+  --tape:var(--yellow);
+  background:var(--paper);border:4px solid var(--ink);border-radius:var(--wobble);
+  box-shadow:var(--shadow);padding:16px 16px 20px;position:relative;
+  transition:transform .12s ease;
+  display:flex;flex-direction:column;gap:12px;
+}
+.rcard:nth-child(1){transform:rotate(-1.6deg)}
+.rcard:nth-child(2){transform:rotate(1.2deg)}
+.rcard:nth-child(3){transform:rotate(-1deg)}
+.rcard:nth-child(4){transform:rotate(1.8deg)}
+.rcard:hover{transform:rotate(0) scale(1.04);z-index:2}
+.rcard::before{
+  content:"";position:absolute;top:-14px;left:50%;transform:translateX(-50%) rotate(-3deg);
+  width:92px;height:26px;background:var(--tape);opacity:.9;
+  border:2px solid rgba(0,0,0,.25);
+}
+.rcard.r2{--tape:var(--cyan)}
+.rcard.r3{--tape:var(--purple)}
+.rcard.r4{--tape:var(--pink)}
+.rcard img{border:3px solid var(--ink);border-radius:14px}
+.rtitle{
+  display:flex;justify-content:space-between;align-items:center;gap:8px;
+}
+.rtitle h3{font-family:var(--font-big);font-size:1.5rem;letter-spacing:.04em}
+.rmult{
+  font-family:var(--font-big);font-size:1rem;
+  background:var(--tape);border:3px solid var(--ink);border-radius:10px;
+  padding:3px 10px;box-shadow:3px 3px 0 var(--ink);white-space:nowrap;
+  transform:rotate(2deg);
+}
+.rfacts{font-weight:700;font-size:.95rem;display:flex;flex-direction:column;gap:5px;margin-top:auto}
+.rfacts .row{display:flex;justify-content:space-between;border-bottom:2px dashed rgba(0,0,0,.25);padding-bottom:4px}
+.rodds{font-family:var(--font-hand);font-size:.95rem;text-align:center;margin-top:4px}
+.rar-note{
+  margin:44px auto 0;max-width:560px;text-align:center;
+  font-family:var(--font-hand);font-size:1.1rem;font-weight:700;
+  background:var(--yellow);border:3px solid var(--ink);border-radius:var(--wobble2);
+  padding:14px 22px;box-shadow:var(--shadow);transform:rotate(-.8deg);
+  position:relative;z-index:1;
+}
+@media(max-width:1000px){.rarity-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.rarity-grid{grid-template-columns:1fr}}
+
+/* ---------- tokenomics ---------- */
+.tok-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:50px;align-items:center;position:relative;z-index:1}
+.tok-big{
+  font-family:var(--font-big);font-size:clamp(4.5rem,10vw,7.5rem);line-height:.9;
+  color:var(--paper);-webkit-text-stroke:3px var(--ink);
+  text-shadow:7px 7px 0 var(--ink);transform:rotate(-3deg);
+}
+.tok-big small{
+  display:block;font-family:var(--font-hand);font-size:1.15rem;color:var(--ink);
+  -webkit-text-stroke:0;text-shadow:none;margin-top:14px;transform:rotate(1deg);
+}
+.alloc{display:flex;flex-direction:column;gap:20px}
+.arow{
+  background:var(--paper);border:4px solid var(--ink);border-radius:16px 20px 14px 22px;
+  padding:16px 18px;box-shadow:var(--shadow);
+}
+.arow:nth-child(1){transform:rotate(-.6deg)}
+.arow:nth-child(2){transform:rotate(.7deg)}
+.arow:nth-child(3){transform:rotate(-.5deg)}
+.arow .top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+.arow .top b{font-size:1.05rem}
+.arow .top span{font-family:var(--font-big);font-size:1.5rem}
+.abar{height:20px;border:3px solid var(--ink);border-radius:99px;background:repeating-linear-gradient(45deg,#eee 0 8px,#fff 8px 16px);overflow:hidden}
+.abar i{
+  display:block;height:100%;width:0;border-right:3px solid var(--ink);
+  transition:width 1s cubic-bezier(.2,.7,.2,1);
+}
+.abar.a1 i{background:var(--green)}
+.abar.a2 i{background:var(--cyan)}
+.abar.a3 i{background:var(--pink)}
+.abar.in i{width:var(--w)}
+.arow .desc{font-size:.9rem;font-weight:700;margin-top:8px}
+@media(max-width:860px){.tok-grid{grid-template-columns:1fr;gap:40px}}
+
+/* ---------- flywheel ---------- */
+.fly-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;position:relative;z-index:1}
+.fly-box{
+  background:var(--paper);border:4px solid var(--ink);border-radius:var(--wobble);
+  box-shadow:var(--shadow);padding:26px;transform:rotate(-.8deg);
+}
+.fly-svg{width:100%;display:block}
+.fly-svg .ring{
+  fill:none;stroke:var(--ink);stroke-width:3;stroke-dasharray:14 12;stroke-linecap:round;
+  animation:spin 20s linear infinite;transform-origin:230px 230px;
+}
+.fly-svg .node{stroke:var(--ink);stroke-width:3.5}
+.fly-svg text{font-family:var(--font-big);fill:var(--ink);font-size:19px;letter-spacing:.04em}
+.fly-svg .sub{font-family:var(--font-body);font-weight:700;font-size:12px}
+.fly-svg .core{font-size:30px}
+.fly-steps{display:flex;flex-direction:column;gap:18px}
+.fstep{
+  display:flex;gap:14px;align-items:flex-start;
+  background:var(--paper);border:3px solid var(--ink);border-radius:14px 18px 12px 20px;
+  padding:14px 16px;box-shadow:4px 4px 0 var(--ink);
+}
+.fstep:nth-child(odd){transform:rotate(-.7deg)}
+.fstep:nth-child(even){transform:rotate(.7deg)}
+.fstep .dot{
+  flex:none;width:40px;height:40px;border:3px solid var(--ink);border-radius:50% 45% 55% 48%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-big);font-size:1.1rem;background:var(--yellow);
+}
+.fstep h4{font-size:1.02rem;margin-bottom:2px}
+.fstep p{font-size:.92rem;font-weight:700}
+@media(max-width:860px){.fly-grid{grid-template-columns:1fr}}
+
+/* ---------- how ---------- */
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;position:relative;z-index:1}
+.hcard{
+  background:var(--paper);border:4px solid var(--ink);border-radius:var(--wobble2);
+  padding:24px;box-shadow:var(--shadow);position:relative;
+}
+.hcard:nth-child(1){transform:rotate(-1.2deg)}
+.hcard:nth-child(2){transform:rotate(.8deg)}
+.hcard:nth-child(3){transform:rotate(-.9deg)}
+.hcard .k{
+  font-family:var(--font-big);font-size:2.6rem;position:absolute;top:-24px;left:16px;
+  color:var(--yellow);-webkit-text-stroke:2px var(--ink);text-shadow:3px 3px 0 var(--ink);
+}
+.hcard h3{font-family:var(--font-big);font-size:1.35rem;letter-spacing:.03em;margin:16px 0 8px}
+.hcard p{font-size:.95rem;font-weight:700}
+.arrow{
+  font-family:var(--font-hand);font-size:1.4rem;text-align:center;margin:8px 0;
+  display:none;
+}
+@media(max-width:820px){.how-grid{grid-template-columns:1fr;gap:30px}}
+
+/* ---------- faq ---------- */
+.faq{max-width:740px;position:relative;z-index:1}
+details{
+  background:var(--paper);border:4px solid var(--ink);border-radius:16px 20px 14px 22px;
+  box-shadow:5px 5px 0 var(--ink);margin-bottom:16px;overflow:hidden;
+}
+details:nth-child(odd){transform:rotate(-.4deg)}
+details:nth-child(even){transform:rotate(.4deg)}
+summary{
+  cursor:pointer;list-style:none;padding:16px 20px;
+  font-weight:700;font-size:1.05rem;
+  display:flex;justify-content:space-between;align-items:center;gap:14px;
+}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"👀";font-size:1.2rem;transition:transform .15s ease}
+details[open] summary::after{content:"💥"}
+details p{padding:0 20px 18px;font-weight:700;font-size:.95rem}
+
+/* ---------- final ---------- */
+.final{text-align:center;padding:110px 0;position:relative;overflow:hidden}
+.final h2{
+  font-size:clamp(2.6rem,6vw,4.4rem);margin-bottom:14px;
+  text-shadow:4px 4px 0 rgba(0,0,0,.2);position:relative;z-index:1;
+}
+.final p{font-family:var(--font-hand);font-size:1.3rem;font-weight:700;margin-bottom:34px;position:relative;z-index:1}
+.final .btn{position:relative;z-index:1;font-size:1.5rem;padding:16px 38px}
+footer{
+  background:var(--ink);color:var(--paper);padding:28px 0;font-weight:700;font-size:.9rem;
+}
+.foot-inner{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:center}
+.foot-links{display:flex;gap:20px}
+.foot-links a{border-bottom:2px solid transparent}
+.foot-links a:hover{border-bottom-color:var(--green);color:var(--green)}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span>$MYST</span><span>🔥 5% TAX = BUYBACK &amp; BURN 🔥</span><span class="g">10,000 BOXES</span><span>❓ WHAT'S INSIDE ❓</span><span>50% AIRDROPPED TO HOLDERS</span><span class="g">MINT ~$0.30</span><span>ROBINHOOD CHAIN</span><span>$MYST</span><span>🔥 5% TAX = BUYBACK &amp; BURN 🔥</span><span class="g">10,000 BOXES</span><span>❓ WHAT'S INSIDE ❓</span><span>50% AIRDROPPED TO HOLDERS</span><span class="g">MINT ~$0.30</span><span>ROBINHOOD CHAIN</span>
+  </div>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="#"><span class="q">?</span>$MYST</a>
+    <div class="nav-links">
+      <a href="#rarities">the boxes</a>
+      <a href="#tokenomics">tokenomics</a>
+      <a href="#flywheel">flywheel</a>
+      <a href="#faq">faq</a>
+    </div>
+    <a class="btn btn-green" href="https://opensea.io" target="_blank" rel="noopener">MINT A BOX</a>
+  </div>
+</nav>
+
+<header>
+  <span class="doodle" style="top:8%;left:4%;font-size:5rem;transform:rotate(-15deg)">?</span>
+  <span class="doodle" style="top:60%;left:45%;font-size:3rem;transform:rotate(20deg)">?</span>
+  <span class="doodle" style="bottom:6%;right:6%;font-size:6rem;transform:rotate(10deg)">?</span>
+  <div class="wrap hero-grid">
+    <div>
+      <span class="stamp">📦 now minting on Robinhood Chain</span>
+      <h1>10,000 BOXES.<br><span class="hl">SOMETHING'S</span> INSIDE.</h1>
+      <div class="hero-sub">
+        we're not gonna tell you what. it's a mystery box. that's the whole point.<br>
+        mint for ~30 cents → hold → get airdropped <b>$MYST</b>. rarer box = <span class="scratch">bigger bags</span> WAY bigger bags.
+      </div>
+      <div class="hero-cta">
+        <a class="btn btn-green" href="https://opensea.io" target="_blank" rel="noopener">MINT ON OPENSEA</a>
+        <a class="btn btn-white" href="#rarities">show me the boxes 👇</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hstat"><b>10,000</b><span>boxes</span></div>
+        <div class="hstat"><b>$0.30</b><span>per box</span></div>
+        <div class="hstat"><b>4</b><span>rarities</span></div>
+        <div class="hstat"><b>50%</b><span>airdropped</span></div>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="burst"></div>
+      <div class="hero-bubble">bro just opened a crystal 😭😭</div>
+      <img src="images/legendary.jpg" alt="Legendary crystal mystery box exploding with light">
+      <span class="rare-tag">1 IN 33 BOXES!!</span>
+    </div>
+  </div>
+</header>
+
+<section id="rarities" class="paper-sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>PICK A BOX. ANY BOX. 📦</h2>
+      <p>ok fine you can't pick — rarity is random at mint. every box gets $MYST, some boxes get <em>a lot</em> of $MYST.</p>
+    </div>
+    <div class="rarity-grid">
+      <div class="rcard r1">
+        <img src="images/common.jpg" alt="Common wooden mystery box" loading="lazy">
+        <div class="rtitle"><h3>WOODEN</h3><span class="rmult">1x</span></div>
+        <div class="rfacts">
+          <div class="row"><span>supply</span><b>6,000 (60%)</b></div>
+          <div class="row"><span>airdrop</span><b>~19.6K $MYST</b></div>
+        </div>
+        <div class="rodds">"it's just a box" — no it's a free airdrop</div>
+      </div>
+      <div class="rcard r2">
+        <img src="images/rare.jpg" alt="Rare steel mystery box with cyan runes" loading="lazy">
+        <div class="rtitle"><h3>STEEL</h3><span class="rmult">2.5x</span></div>
+        <div class="rfacts">
+          <div class="row"><span>supply</span><b>2,500 (25%)</b></div>
+          <div class="row"><span>airdrop</span><b>~49.1K $MYST</b></div>
+        </div>
+        <div class="rodds">glowing runes = glowing portfolio</div>
+      </div>
+      <div class="rcard r3">
+        <img src="images/epic.jpg" alt="Epic golden mystery box with purple runes" loading="lazy">
+        <div class="rtitle"><h3>GOLDEN</h3><span class="rmult">6x</span></div>
+        <div class="rfacts">
+          <div class="row"><span>supply</span><b>1,200 (12%)</b></div>
+          <div class="row"><span>airdrop</span><b>~117.9K $MYST</b></div>
+        </div>
+        <div class="rodds">it has a weird glowing eye. don't ask.</div>
+      </div>
+      <div class="rcard r4">
+        <img src="images/legendary.jpg" alt="Legendary crystal mystery box" loading="lazy">
+        <div class="rtitle"><h3>CRYSTAL</h3><span class="rmult">20x</span></div>
+        <div class="rfacts">
+          <div class="row"><span>supply</span><b>300 (3%)</b></div>
+          <div class="row"><span>airdrop</span><b>~392.9K $MYST</b></div>
+        </div>
+        <div class="rodds">screenshot it. post it. never log off.</div>
+      </div>
+    </div>
+    <p class="rar-note">✏️ math nerds: 500M $MYST pool ÷ all boxes weighted by multiplier. final numbers locked at snapshot.</p>
+  </div>
+</section>
+
+<section id="tokenomics">
+  <span class="doodle" style="top:10%;right:5%;font-size:5rem;transform:rotate(12deg)">?</span>
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>THE TOKENOMICS 🧮</h2>
+      <p>no VC. no team allocation. no "strategic partners". your mint literally becomes the liquidity pool.</p>
+    </div>
+    <div class="tok-grid">
+      <div class="tok-big">1B<small>total $MYST supply (before the burns start 🔥)</small></div>
+      <div class="alloc">
+        <div class="arow">
+          <div class="top"><b>💰 airdrop to box holders</b><span>50%</span></div>
+          <div class="abar a1" data-w="50%"><i></i></div>
+          <div class="desc">500M straight to your wallet. no claiming, no forms, no "connect wallet to verify".</div>
+        </div>
+        <div class="arow">
+          <div class="top"><b>💧 liquidity</b><span>40%</span></div>
+          <div class="abar a2" data-w="40%"><i></i></div>
+          <div class="desc">400M paired with mint money to seed the pool. that's where your 30 cents goes.</div>
+        </div>
+        <div class="arow">
+          <div class="top"><b>📢 marketing / tools / listings</b><span>10%</span></div>
+          <div class="abar a3" data-w="10%"><i></i></div>
+          <div class="desc">100M to make noise, build stuff and get listed.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="flywheel" class="paper-sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>THE FLYWHEEL 🎡</h2>
+      <p>5% tax on every buy and sell. it doesn't go to a wallet. it goes to war against the supply.</p>
+    </div>
+    <div class="fly-grid">
+      <div class="fly-box">
+        <svg class="fly-svg" viewBox="0 0 460 460" role="img" aria-label="Flywheel: trade, 5 percent tax, buyback, burn, repeat">
+          <circle class="ring" cx="230" cy="230" r="150"/>
+          <text class="core" x="230" y="240" text-anchor="middle">$MYST</text>
+          <g>
+            <rect class="node" x="150" y="14" width="160" height="60" rx="16" fill="#FFD93B"/>
+            <text x="230" y="41" text-anchor="middle">TRADE 📈</text>
+            <text class="sub" x="230" y="61" text-anchor="middle">buys &amp; sells</text>
+          </g>
+          <g>
+            <rect class="node" x="330" y="200" width="122" height="60" rx="16" fill="#4DE8DC"/>
+            <text x="391" y="227" text-anchor="middle">5% TAX</text>
+            <text class="sub" x="391" y="247" text-anchor="middle">collected</text>
+          </g>
+          <g>
+            <rect class="node" x="150" y="386" width="160" height="60" rx="16" fill="#B678FF"/>
+            <text x="230" y="413" text-anchor="middle">BUYBACK</text>
+            <text class="sub" x="230" y="433" text-anchor="middle">from the pool</text>
+          </g>
+          <g>
+            <rect class="node" x="8" y="200" width="122" height="60" rx="16" fill="#FF7AC6"/>
+            <text x="69" y="227" text-anchor="middle">BURN 🔥</text>
+            <text class="sub" x="69" y="247" text-anchor="middle">gone forever</text>
+          </g>
+        </svg>
+      </div>
+      <div class="fly-steps">
+        <div class="fstep"><div class="dot">1</div><div><h4>people trade $MYST</h4><p>every buy and sell pays 5% into the flywheel. yes even you.</p></div></div>
+        <div class="fstep"><div class="dot">2</div><div><h4>tax buys back $MYST</h4><p>the tax is used to buy tokens straight off the market. permanent buy pressure.</p></div></div>
+        <div class="fstep"><div class="dot">3</div><div><h4>bought = burned</h4><p>every token bought back gets burned. deleted. gone. supply only goes down.</p></div></div>
+        <div class="fstep"><div class="dot">4</div><div><h4>repeat forever</h4><p>more volume → more burns → less supply → the wheel spins itself. 🎡🔥</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <span class="doodle" style="bottom:10%;left:3%;font-size:4.5rem;transform:rotate(-18deg)">?</span>
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>HOW IT WORKS (it's 3 steps)</h2>
+    </div>
+    <div class="how-grid">
+      <div class="hcard">
+        <span class="k">1</span>
+        <h3>MINT 📦</h3>
+        <p>grab boxes on OpenSea for ~$0.30 each. no wallet limit. every mint is a dice roll on rarity.</p>
+      </div>
+      <div class="hcard">
+        <span class="k">2</span>
+        <h3>HOLD 🤲</h3>
+        <p>keep the box in your wallet. snapshot happens before launch — box in wallet = airdrop incoming.</p>
+      </div>
+      <div class="hcard">
+        <span class="k">3</span>
+        <h3>RECEIVE 🪂</h3>
+        <p>liquidity goes live, $MYST launches, and 500M tokens rain on holders. rarer box = fatter drop.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="paper-sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>FAQ ❓</h2>
+      <p>the stuff you were gonna ask in telegram anyway.</p>
+    </div>
+    <div class="faq">
+      <details>
+        <summary>what chain is this on?</summary>
+        <p>Robinhood Chain. mint is on OpenSea, gas is in ETH, boxes sit in your wallet like any NFT.</p>
+      </details>
+      <details>
+        <summary>how much is a box?</summary>
+        <p>~$0.30 in ETH. yes, thirty cents. no, there's no wallet limit. yes, more boxes = more airdrop.</p>
+      </details>
+      <details>
+        <summary>wen airdrop?</summary>
+        <p>after mint: pool gets seeded with mint money + 40% of supply → token launches → snapshot → 500M $MYST drops on holders. dates announced on X and Telegram.</p>
+      </details>
+      <details>
+        <summary>do I need to claim anything?</summary>
+        <p>nope. no claim page, no forms, no signing weird transactions. box in wallet at snapshot = tokens show up. that's it.</p>
+      </details>
+      <details>
+        <summary>where does the 5% tax actually go?</summary>
+        <p>100% into buyback &amp; burn. no team wallet skims it. tax buys $MYST off the market and burns it. forever.</p>
+      </details>
+      <details>
+        <summary>can I sell my box after the airdrop?</summary>
+        <p>yeah — boxes stay tradable on OpenSea as collectibles. but the airdrop belongs to whoever held at snapshot, so don't paper-hand before that.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<div class="final">
+  <span class="doodle" style="top:12%;left:8%;font-size:5rem;transform:rotate(-12deg)">?</span>
+  <span class="doodle" style="bottom:14%;right:8%;font-size:5rem;transform:rotate(14deg)">?</span>
+  <div class="wrap">
+    <h2>WHAT'S IN YOUR BOX? 👀</h2>
+    <p>10,000 boxes. 300 crystals. one way to find out.</p>
+    <a class="btn btn-green" href="https://opensea.io" target="_blank" rel="noopener">MINT ON OPENSEA 📦</a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap foot-inner">
+    <span>© 2026 $MYST — boxes on Robinhood Chain. nfa. dyor. open the box.</span>
+    <div class="foot-links">
+      <a href="https://opensea.io" target="_blank" rel="noopener">OpenSea</a>
+      <a href="#" rel="noopener">X / Twitter</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const bars=document.querySelectorAll('.abar');
+const io=new IntersectionObserver(es=>{
+  es.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.style.setProperty('--w',e.target.dataset.w);
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    }
+  });
+},{threshold:.4});
+bars.forEach(b=>io.observe(b));
+</script>
+</body>
+</html>
